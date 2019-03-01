@@ -30,12 +30,14 @@ namespace Episerver.SimpleContentAPI.Controllers
         }
 
         [Route("articles")]
+        [WebApiAuthorize(Roles = "ApiUsers")]
         public IHttpActionResult GetArticles()
         {
             return GetAllOfType("ArticlePage");
         }
 
         [Route("articles/{pagereference}")]
+        [WebApiAuthorize(Roles = "ApiUsers")]
         public IHttpActionResult GetArticle(PageReference pagereference)
         {
             return GetSinglePage(pagereference);

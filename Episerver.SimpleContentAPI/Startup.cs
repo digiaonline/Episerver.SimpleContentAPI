@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 
 [assembly: OwinStartup(typeof(Episerver.SimpleContentAPI.Startup))]
@@ -43,6 +44,16 @@ namespace Episerver.SimpleContentAPI
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => manager.GenerateUserIdentityAsync(user))
                 }
+            });
+
+            // Configure the use of Bearer Tokens
+            // Do not set the token expiry too high, as when editing user roles we don't have revoke mechanism
+            app.UseOAuthBearerTokens(new OAuthAuthorizationServerOptions
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(6),
+                Provider = new WebApiAuthorizationServerProvider()
             });
 
             // Configure Web API
