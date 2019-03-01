@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using System.Web.Http;
 using EPiServer.Cms.UI.AspNetIdentity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -43,6 +44,20 @@ namespace Episerver.SimpleContentAPI
                         regenerateIdentity: (manager, user) => manager.GenerateUserIdentityAsync(user))
                 }
             });
+
+            // Configure Web API
+            HttpConfiguration config = new HttpConfiguration();
+            // Enable CORS
+            config.EnableCors();
+            // Map Attribute Routes
+            config.MapHttpAttributeRoutes();
+            // Remove XmlFormatter
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            // Ignore reference loops
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            // Apply Web API configuration for self-host. 
+            app.UseWebApi(config);
+
         }
     }
 }
