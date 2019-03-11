@@ -302,10 +302,12 @@
     <Compile Include="Business\Initialization\DisplayRegistryInitialization.cs" />
     <Compile Include="Business\Initialization\ExtendedTinyMceInitialization.cs" />
     <Compile Include="Business\Initialization\FilterConfig.cs" />
+    <Compile Include="Business\Initialization\JOSPropertyHandlerInitialization.cs" />
     <Compile Include="Business\PageContextActionFilter.cs" />
     <Compile Include="Business\PageTypeExtensions.cs" />
     <Compile Include="Business\PageViewContextFactory.cs" />
     <Compile Include="Business\Rendering\AlloyContentAreaRenderer.cs" />
+    <Compile Include="Business\Rendering\CustomXhtmlStringPropertyHandler.cs" />
     <Compile Include="Business\Rendering\ErrorHandlingContentRenderer.cs" />
     <Compile Include="Business\Rendering\IContainerPage.cs" />
     <Compile Include="Business\Rendering\ICustomCssInContentArea.cs" />
